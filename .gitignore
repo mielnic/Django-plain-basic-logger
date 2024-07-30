@@ -1,0 +1,32 @@
+# Archivos
+*.doc
+*.docx
+log*.*
+blame*.*
+*.temp
+*.tmp
+*.swp
+*.sql
+*.sqlite3
+sandbox.py
+sandbox.html
+*.pyc
+settings.py
+!login.html
+!logout.svg
+!login.svg
+!login.js\
+!logo.png
+!logo_20.png
+.DS_Store
+
+# Carpetas
+docs/
+temp/
+tmp/
+node_modules/
+*vsc/
+*vcode/
+_pycache_/
+zzz-varios/
+venv/
