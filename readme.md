@@ -5,7 +5,7 @@ Very simple logging app for Django. It adds asection to the Django Admin, and di
 Configs for the `settings.py` file:
 
 LOGDIR = (os.path.join(BASE_DIR, 'log'))
-LOGFILE = f'{LOGDIR}/idlog.log'
+LOGFILE = f'{LOGDIR}/logfile.log'
 LOG_LINES = 200
 
 LOGGING = {
@@ -30,7 +30,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'vd': {
+        'logger': {
             'handlers': ['logfile'],
             'level': 'INFO',
             'propagate': True,

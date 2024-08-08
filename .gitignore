@@ -18,6 +18,8 @@ settings.py
 !login.js\
 !logo.png
 !logo_20.png
+!logfile_change_list.html
+!logfile.html
 .DS_Store
 
 # Carpetas
