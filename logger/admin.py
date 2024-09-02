@@ -1,40 +1,15 @@
 from django.contrib import admin
-from .models import LogFileProxy
-from django.urls import path
-from django.template.response import TemplateResponse
-from .utils import get_log_file_content
+from .models import LogEntry
+from unfold.admin import ModelAdmin
 
-@admin.register(LogFileProxy)
-class LogFileProxyAdmin(admin.ModelAdmin):
-    change_list_template = "admin/logfile_change_list.html"
-    
-    def get_urls(self):
-        urls = super().get_urls()
-        custom_urls = [
-            path('', self.admin_site.admin_view(self.view_logfile), name='logfileproxy_changelist'),
-        ]
-        return custom_urls + urls
-    
-    def get_queryset(self, request):
-        # Return an empty queryset to prevent database queries
-        return LogFileProxy.objects.none()
-
-    def view_logfile(self, request):
-        # Include logic to get your log contents
-        context = dict(
-           self.admin_site.each_context(request),
-           log_file_content=get_log_file_content(),
-        )
-        return TemplateResponse(request, "admin/logfile.html", context)
+@admin.register(LogEntry)
+class LogEntryAdmin(ModelAdmin):
+    list_display = ('timestamp', 'level', 'message')
+    search_fields = ('level', 'message')
+    readonly_fields = ('timestamp', 'level', 'message')
 
     def has_add_permission(self, request):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
+        return False  # Disables the ability to add log entries manually through the admin
 
     def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_view_permission(self, request, obj=None):
-        return request.user.is_superuser
+        return False  # Disables the ability to edit log entries through the admin
