@@ -1,4 +1,3 @@
-# logger/apps.py
 from django.apps import AppConfig
 import logging.config
 from django.conf import settings
@@ -10,23 +9,23 @@ class LoggerConfig(AppConfig):
         from .utils import DatabaseLogHandler
         LOGGING = {
             'version': 1,
-            'disable_existing_loggers': True,
+            'disable_existing_loggers': False,
             'handlers': {
                 'logfile': {
-                    'level': 'INFO',
+                    'level': settings.FILE_LOGLEVEL,
                     'class': 'logging.FileHandler',
                     'filename': settings.LOGFILE, 
                     'formatter': 'simple',
                 },
                 'db': {
-                    'level': 'INFO',
+                    'level': settings.DB_LOGLEVEL,
                     'class': 'logger.utils.DatabaseLogHandler',
                 },
             },
             'loggers': {
                 '': {
                     'handlers': ['logfile', 'db'],
-                    'level': 'INFO',
+                    'level': 'DEBUG',
                     'propagate': True,
                 },
             },
